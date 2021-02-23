@@ -1,0 +1,59 @@
+@startuml StationMeteo
+
+class StationMeteo {
+    - AffichageLCD lcd;
+    - Configuration_Wifi config;
+
+    + StationMeteo();
+    + void Setup();
+    + void Executer();
+}
+
+class Bme280 {
+    - Adafruit_BME280 m_bme;
+    - byte m_adresse_bme;
+    + float m_temperature;
+    + float m_humidite;
+    + float m_pression;
+
+    + Bme280(byte p_adresse_bme);
+    + void EtatInitial();
+    + void LireInformationBme280();
+    + float EnvoyerTemperature();
+    + float EnvoyerHumidite();
+    + float EnvoyerPression();
+}
+
+class AffichageLCD {
+    - LiquidCrystal_I2C lcd;
+
+    + AffichageLCD();
+    + void EtatInitial();
+    + void AfficherInfos(float p_Donnees[4]);
+}
+
+class Configuration_Wifi {
+    - const char* m_ssid = "";
+	- const char* m_motDePasse = "";
+	- const char* m_serveur_mqtt = "";
+    - const char* user = "";
+    - const char* mdp = "";
+    - const int m_port_mqtt = 1883;
+    - unsigned long m_tempsDernierMessage;
+    - WiFiClient m_espClient;
+    - byte m_addr = 0x76;
+    - PubSubClient m_client;
+    - Bme280 m_bme;
+    - void Reconnecter();
+    - void Publier();
+
+    + Configuration_Wifi();
+    + void Configuration();
+    + void Loop();
+}
+
+Configuration_Wifi --> Bme280
+StationMeteo --> Configuration_Wifi
+StationMeteo --> AffichageLCD
+Bme280 <-- StationMeteo
+@enduml

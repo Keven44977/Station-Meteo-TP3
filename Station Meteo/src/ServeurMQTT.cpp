@@ -15,13 +15,13 @@ void ServeurMQTT::Configuration()
 {
     WiFi.mode(WIFI_STA);
     //ajouter la serialization json ici 
-     
+
     this->m_wifiManager.setSaveConfigCallback(saveConfigCallback);
 
-    WiFiManagerParameter custom_mqtt_serveur("serveur", "mqtt serveur", this->mqtt_serveur, 40);
-    WiFiManagerParameter custom_mqtt_port("port", "mqtt port", this->mqtt_port, 5);
-    WiFiManagerParameter custom_mqtt_utitilisateur("utilisateur", "mqtt utilisateur", this->mqtt_utilisateur, 30);
-    WiFiManagerParameter custom_mqtt_motDePasse("motDePasse", "mqtt motDePasse", this->mqtt_motDePasse, 100);
+    WiFiManagerParameter custom_mqtt_serveur("serveur", "mqtt serveur", this->m_serveur_mqtt, 40);
+    WiFiManagerParameter custom_mqtt_port("port", "mqtt port", this->m_port_mqtt, 5);
+    WiFiManagerParameter custom_mqtt_utitilisateur("utilisateur", "mqtt utilisateur", this->m_utilisateur, 30);
+    WiFiManagerParameter custom_mqtt_motDePasse("motDePasse", "mqtt motDePasse", this->m_motDePasseUtilisateur, 100);
 
     this->m_wifiManager.addParameter(&custom_mqtt_serveur);
     this->m_wifiManager.addParameter(&custom_mqtt_port);
@@ -47,7 +47,7 @@ void ServeurMQTT::Configuration()
     strcpy(this->mqtt_utilisateur, custom_mqtt_utitilisateur.getValue());
     strcpy(this->mqtt_motDePasse, custom_mqtt_motDePasse.getValue());
 
-    this->m_client.setServer(this->m_serveur_mqtt, this->m_port_mqtt);
+    this->m_client.setServer(this->mqtt_serveur, atoi(this->mqtt_port));
 }
 
 void ServeurMQTT::Reconnecter()

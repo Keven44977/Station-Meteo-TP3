@@ -8,10 +8,11 @@
 class StationMeteo 
 {
 private:
-    AffichageLCD lcd;
     ServeurMQTT serveurMQTT;
+    byte addrLcd = 0x27;
     byte addr = 0x76;
     Bme280 bme = Bme280(addr);
+    AffichageLCD lcd = AffichageLCD(addrLcd);
 public:
     StationMeteo();
     void Setup();

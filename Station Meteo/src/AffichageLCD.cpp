@@ -1,11 +1,12 @@
 #include <AffichageLCD.h>
 
+AffichageLCD::AffichageLCD(){}
+
 AffichageLCD::AffichageLCD(byte p_adresse)
 {
     this->m_adresseLCD = p_adresse;
     this->m_lcd = LiquidCrystal_I2C(this->m_adresseLCD, 16, 2);
 }
-
 
 void AffichageLCD::AfficherInfos(float p_temperature, float p_humidite, float p_pression, float p_altitude)
 {
@@ -34,3 +35,4 @@ void AffichageLCD::AfficherInfos(float p_temperature, float p_humidite, float p_
 
         this->m_changerDonnees = !this->m_changerDonnees;
     }
+}

@@ -10,4 +10,5 @@ void StationMeteo::Setup()
 void StationMeteo::Executer()
 {
     this->serveurMQTT.Loop();
+    this->lcd.AfficherInfos(this->bme.EnvoyerTemperature(), this->bme.EnvoyerHumidite(), this->bme.EnvoyerPression(), this->bme.EnvoyerAltitude());
 }

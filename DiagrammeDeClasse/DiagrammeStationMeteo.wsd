@@ -3,6 +3,8 @@
 class StationMeteo {
     - AffichageLCD lcd;
     - Configuration_Wifi config;
+    - byte addr = 0x76;
+    - Bme280 bme;
 
     + StationMeteo();
     + void Setup();
@@ -28,11 +30,11 @@ class AffichageLCD {
     - LiquidCrystal_I2C lcd;
 
     + AffichageLCD();
-    + void EtatInitial();
-    + void AfficherInfos(float p_Donnees[4]);
+    + AffichageLCD(byte p_adresse);
+    + void AfficherInfos(float p_temp, float p_humidite, float p_pression, float p_altitude);
 }
 
-class Configuration_Wifi {
+class ServeurMQTT {
     - const char* m_ssid = "";
 	- const char* m_motDePasse = "";
 	- const char* m_serveur_mqtt = "";
@@ -52,8 +54,8 @@ class Configuration_Wifi {
     + void Loop();
 }
 
-Configuration_Wifi --> Bme280
-StationMeteo --> Configuration_Wifi
+ServeurMQTT --> Bme280
+StationMeteo --> ServeurMQTT
 StationMeteo --> AffichageLCD
 Bme280 <-- StationMeteo
 @enduml

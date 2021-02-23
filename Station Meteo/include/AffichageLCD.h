@@ -12,7 +12,7 @@ private:
     char m_changerDonnees;
 
 public:
-    AffichageLCD();
     AffichageLCD(byte p_adresse);
+    void Initialiser();
     void AfficherInfos(float p_temp, float p_humidite, float p_pression, float p_altitude);
 };

@@ -6,7 +6,8 @@
 #include <Wire.h>
 #include <Adafruit_BME280.h>
 #include <WiFiManager.h>
-#include <DNSServer.h>
+#include <FS.h>
+#include <ArduinoJson.h>
 
 class ServeurMQTT
 {
@@ -17,8 +18,8 @@ private:
     char mqtt_utilisateur[30];
     char mqtt_motDePasse[100];
 
-	const char* m_ssid_pointAcces = "StationMeteo1234";
-	const char* m_motDePasse_pointAcces = "allo1234";
+	//const char* m_ssid_pointAcces = "StationMeteo1234";
+	//const char* m_motDePasse_pointAcces = "StationMeteo1234";
 
 	const char* m_serveur_mqtt = "192.168.2.52";
     const int m_port_mqtt = 1883;

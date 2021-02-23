@@ -1,12 +1,13 @@
 @startuml StationMeteo
 
 class StationMeteo {
-    - AffichageLCD lcd;
-    - Configuration_Wifi config;
+    - ServeurMQTT serveurMQTT;
+    - byte addrLcd = 0x27;
     - byte addr = 0x76;
     - Bme280 bme;
+    - AffichageLCD lcd;
 
-    + StationMeteo();
+    + StationMeteo();A
     + void Setup();
     + void Executer();
 }

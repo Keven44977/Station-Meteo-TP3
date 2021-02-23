@@ -1,5 +1,6 @@
 #include <ServeurMQTT.h>
 #include <bme280.h>
+
 bool shouldSaveConfig = false;
 
 ServeurMQTT::ServeurMQTT() {}
@@ -12,21 +13,23 @@ void saveConfigCallback()
 
 void ServeurMQTT::Configuration()
 {
-    // WiFi.mode(WIFI_STA);
-    // this->m_wifiManager.setSaveConfigCallback(saveConfigCallback);
+    WiFi.mode(WIFI_STA);
+    //ajouter la serialization json ici 
+     
+    this->m_wifiManager.setSaveConfigCallback(saveConfigCallback);
 
-    // WiFiManagerParameter custom_mqtt_serveur("serveur", "mqtt serveur", this->mqtt_serveur, 40);
-    // WiFiManagerParameter custom_mqtt_port("port", "mqtt port", this->mqtt_port, 5);
-    // WiFiManagerParameter custom_mqtt_utitilisateur("utilisateur", "mqtt utilisateur", this->mqtt_utilisateur, 30);
-    // WiFiManagerParameter custom_mqtt_motDePasse("motDePasse", "mqtt motDePasse", this->mqtt_motDePasse, 100);
+    WiFiManagerParameter custom_mqtt_serveur("serveur", "mqtt serveur", this->mqtt_serveur, 40);
+    WiFiManagerParameter custom_mqtt_port("port", "mqtt port", this->mqtt_port, 5);
+    WiFiManagerParameter custom_mqtt_utitilisateur("utilisateur", "mqtt utilisateur", this->mqtt_utilisateur, 30);
+    WiFiManagerParameter custom_mqtt_motDePasse("motDePasse", "mqtt motDePasse", this->mqtt_motDePasse, 100);
 
-    // this->m_wifiManager.addParameter(&custom_mqtt_serveur);
-    // this->m_wifiManager.addParameter(&custom_mqtt_port);
-    // this->m_wifiManager.addParameter(&custom_mqtt_utitilisateur);
-    // this->m_wifiManager.addParameter(&custom_mqtt_motDePasse);
+    this->m_wifiManager.addParameter(&custom_mqtt_serveur);
+    this->m_wifiManager.addParameter(&custom_mqtt_port);
+    this->m_wifiManager.addParameter(&custom_mqtt_utitilisateur);
+    this->m_wifiManager.addParameter(&custom_mqtt_motDePasse);
 
     //this->m_wifiManager.resetSettings();
-    //this->m_ssid_pointAcces, this->m_motDePasse_pointAcces
+    //this->m_ssid_pointAcces, this->m_motDePasse_pointAcces;
 
     if (!this->m_wifiManager.autoConnect())
     {
@@ -39,10 +42,10 @@ void ServeurMQTT::Configuration()
         Serial.println("Connexion etablie");
     }
 
-    // strcpy(this->mqtt_serveur, custom_mqtt_serveur.getValue());
-    // strcpy(this->mqtt_port, custom_mqtt_port.getValue());
-    // strcpy(this->mqtt_utilisateur, custom_mqtt_utitilisateur.getValue());
-    // strcpy(this->mqtt_motDePasse, custom_mqtt_motDePasse.getValue());
+    strcpy(this->mqtt_serveur, custom_mqtt_serveur.getValue());
+    strcpy(this->mqtt_port, custom_mqtt_port.getValue());
+    strcpy(this->mqtt_utilisateur, custom_mqtt_utitilisateur.getValue());
+    strcpy(this->mqtt_motDePasse, custom_mqtt_motDePasse.getValue());
 
     this->m_client.setServer(this->m_serveur_mqtt, this->m_port_mqtt);
 }

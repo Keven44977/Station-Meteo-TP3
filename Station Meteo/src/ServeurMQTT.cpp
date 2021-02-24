@@ -70,14 +70,12 @@ void ServeurMQTT::Reconnecter()
     }
 }
 
-void ServeurMQTT::Publier()
+void ServeurMQTT::Publier(Bme280 p_bme)
 {
-    this->m_bme.LireInformationBme280();
-
-    float temperature = this->m_bme.EnvoyerTemperature();
-    float humidite = this->m_bme.EnvoyerHumidite();
-    float pression = this->m_bme.EnvoyerPression() / 100.0f;
-    float altitude = this->m_bme.EnvoyerAltitude();
+    float temperature = p_bme.m_temperature;
+    float humidite = p_bme.m_humidite;
+    float pression = p_bme.m_pression / 100.0f;
+    float altitude = p_bme.m_altitude;
 
     Serial.println();
 
@@ -106,7 +104,7 @@ void ServeurMQTT::Publier()
     this->m_client.publish("esp32/altitude", altitudeString);
 }
 
-void ServeurMQTT::Loop()
+void ServeurMQTT::Loop(Bme280 p_bme)
 {
     if (!this->m_client.connected())
     {
@@ -120,6 +118,6 @@ void ServeurMQTT::Loop()
     {
         this->m_tempsDernierMessage = temps;
 
-        Publier();
+        Publier(p_bme);
     }
 }

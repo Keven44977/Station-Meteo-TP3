@@ -16,8 +16,4 @@ public:
     Bme280(byte p_adresse_bme);
     void EtatInitial();
     void LireInformationBme280();
-    float EnvoyerAltitude();
-    float EnvoyerTemperature();
-    float EnvoyerHumidite();
-    float EnvoyerPression();
 };

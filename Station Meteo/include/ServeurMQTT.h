@@ -21,7 +21,8 @@ private:
 	//const char* m_ssid_pointAcces = "StationMeteo1234";
 	//const char* m_motDePasse_pointAcces = "StationMeteo1234";
 
-	const char* m_serveur_mqtt = "192.168.2.52";
+    //Kev: .88
+	const char* m_serveur_mqtt = "192.168.2.88";
     const char* m_port_mqtt = "1883";
     const char* m_utilisateur = "admin";
     const char* m_motDePasseUtilisateur = "adminadmin";
@@ -29,14 +30,12 @@ private:
     unsigned long m_tempsDernierMessage;
 
     WiFiClient m_espClient;
-    byte m_addr = 0x76;
     PubSubClient m_client = PubSubClient(m_espClient);
-    Bme280 m_bme = Bme280(m_addr);
 
     void Reconnecter();
-    void Publier();
+    void Publier(Bme280 p_bme);
 public:
     ServeurMQTT();
     void Configuration();
-    void Loop();
+    void Loop(Bme280 p_bme);
 };

@@ -14,5 +14,7 @@ private:
 public:
     AffichageLCD(byte p_adresse);
     void Initialiser();
+    void Allumer();
+    void Eteindre();
     void AfficherInfos(float p_temp, float p_humidite, float p_pression, float p_altitude);
 };

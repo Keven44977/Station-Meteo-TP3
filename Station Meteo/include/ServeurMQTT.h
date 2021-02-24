@@ -22,6 +22,7 @@ private:
 	//const char* m_motDePasse_pointAcces = "StationMeteo1234";
 
     //Kev: .88
+    //Dust: .52
 	const char* m_serveur_mqtt = "192.168.2.88";
     const char* m_port_mqtt = "1883";
     const char* m_utilisateur = "admin";

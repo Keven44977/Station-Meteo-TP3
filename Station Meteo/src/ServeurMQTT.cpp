@@ -29,8 +29,7 @@ void ServeurMQTT::Configuration()
     this->m_wifiManager.addParameter(&custom_mqtt_motDePasse);
 
     //this->m_wifiManager.resetSettings();
-    //this->m_ssid_pointAcces, this->m_motDePasse_pointAcces;
-
+    
     if (!this->m_wifiManager.autoConnect())
     {
         Serial.println("Erreur de connexion");

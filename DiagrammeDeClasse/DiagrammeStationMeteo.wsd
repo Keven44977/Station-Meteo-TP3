@@ -4,10 +4,13 @@ class StationMeteo {
     - ServeurMQTT serveurMQTT;
     - byte addrLcd = 0x27;
     - byte addr = 0x76;
+    - byte pinBouton = 26;
     - Bme280 bme;
     - AffichageLCD lcd;
+    - Bouton bouton;
+    - byte allumerLCD = 1;
 
-    + StationMeteo();A
+    + StationMeteo();
     + void Setup();
     + void Executer();
 }
@@ -18,45 +21,60 @@ class Bme280 {
     + float m_temperature;
     + float m_humidite;
     + float m_pression;
+    + float m_altitude;
 
     + Bme280(byte p_adresse_bme);
     + void EtatInitial();
     + void LireInformationBme280();
-    + float EnvoyerTemperature();
-    + float EnvoyerHumidite();
-    + float EnvoyerPression();
 }
 
 class AffichageLCD {
-    - LiquidCrystal_I2C lcd;
+    - LiquidCrystal_I2C m_lcd;
+    - byte m_adresseLCD;
+    - long m_tempsPrecedent;
+    - char m_changerDonnees;
 
-    + AffichageLCD();
     + AffichageLCD(byte p_adresse);
+    + void Initialiser();
+    + void Allumer();
+    + void Eteindre();
     + void AfficherInfos(float p_temp, float p_humidite, float p_pression, float p_altitude);
 }
 
+class Bouton {
+    - const byte m_pinbouton;
+    - byte m_etatPrecedent;
+    - byte m_etatCourant;
+
+    + Bouton(byte p_pinBouton);
+    + byte EstRelacher();
+    + byte EstAppuyer();
+}
+
 class ServeurMQTT {
-    - const char* m_ssid = "";
-	- const char* m_motDePasse = "";
-	- const char* m_serveur_mqtt = "";
-    - const char* user = "";
-    - const char* mdp = "";
-    - const int m_port_mqtt = 1883;
+    - WiFiManager m_wifiManager;
+    - char mqtt_serveur[40];
+    - char mqtt_port[5];
+    - char mqtt_utilisateur[30];
+    - char mqtt_motDePasse[100];
+    - const char* m_serveur_mqtt = "192.168.2.88";
+    - const char* m_port_mqtt = "1883";
+    - const char* m_utilisateur = "admin";
+    - const char* m_motDePasseUtilisateur = "adminadmin";
     - unsigned long m_tempsDernierMessage;
     - WiFiClient m_espClient;
-    - byte m_addr = 0x76;
     - PubSubClient m_client;
-    - Bme280 m_bme;
-    - void Reconnecter();
-    - void Publier();
 
-    + Configuration_Wifi();
+    - void Reconnecter();
+    - void Publier(Bme280 p_bme);
+    + ServeurMQTT();
     + void Configuration();
-    + void Loop();
+    + void Loop(Bme280 p_bme);
 }
 
 ServeurMQTT --> Bme280
 StationMeteo --> ServeurMQTT
 StationMeteo --> AffichageLCD
 Bme280 <-- StationMeteo
+StationMeteo --> Bouton
 @enduml

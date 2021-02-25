@@ -8,9 +8,10 @@ void AffichageLCD::Initialiser()
 {
     this->m_lcd = LiquidCrystal_I2C(this->m_adresseLCD, 16, 2);
     this->m_lcd.init();
+    this->m_lcd.clear();    
     this->m_lcd.backlight();
-    this->m_lcd.clear();
     this->m_lcd.print("Station Meteo");
+    delay(2500);
 }
 
 void AffichageLCD::Allumer()
@@ -24,9 +25,25 @@ void AffichageLCD::Eteindre()
     this->m_lcd.noBacklight();
 }
 
+void AffichageLCD::AfficherMessageWifiManager()
+{
+    this->m_lcd.clear();
+    this->m_lcd.print("Connexion au");
+    this->m_lcd.setCursor(0,1);
+    this->m_lcd.print("reseau wifi...");
+}
+
+void AffichageLCD::AfficherMessageMQTT()
+{
+    this->m_lcd.clear();
+    this->m_lcd.print("Connexion au");
+    this->m_lcd.setCursor(0, 1);
+    this->m_lcd.print("serveur MQTT...");
+}
+
 void AffichageLCD::AfficherInfos(float p_temperature, float p_humidite, float p_pression, float p_altitude)
 {
-    long temps = millis();
+    unsigned long temps = millis();
 
     if (temps - this->m_tempsPrecedent > 2500)
     {
@@ -48,7 +65,7 @@ void AffichageLCD::AfficherInfos(float p_temperature, float p_humidite, float p_
         {
             this->m_lcd.setCursor(0, 0);
             this->m_lcd.print("Pres: ");
-            this->m_lcd.print(p_pression/100.0f);
+            this->m_lcd.print(p_pression / 100.0f);
             this->m_lcd.print("hPa");
             this->m_lcd.setCursor(0, 1);
             this->m_lcd.print("Alt: ");

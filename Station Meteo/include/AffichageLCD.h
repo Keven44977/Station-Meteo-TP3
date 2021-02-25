@@ -18,5 +18,6 @@ public:
     void Eteindre();
     void AfficherMessageMQTT();
     void AfficherMessageWifiManager();
+    void AfficherMessageReset();
     void AfficherInfos(float p_temp, float p_humidite, float p_pression, float p_altitude);
 };

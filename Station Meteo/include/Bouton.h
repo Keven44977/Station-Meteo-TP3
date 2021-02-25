@@ -12,4 +12,5 @@ public:
     Bouton(byte p_pinBouton);
     byte EstRelacher();
     byte EstAppuyer();
+    byte EstMaintenu();
 };

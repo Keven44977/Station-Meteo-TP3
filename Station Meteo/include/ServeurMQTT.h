@@ -10,6 +10,7 @@
 #include <ArduinoJson.h>
 #include <SPIFFS.h>
 #include <AffichageLCD.h>
+#include <Bouton.h>
 
 class ServeurMQTT
 {
@@ -29,7 +30,8 @@ private:
 
     //Kev: .88
     //Dust: .52
-	const char* m_serveur_mqtt = "192.168.2.88";
+    //Cegep: 10.200.80.175
+	const char* m_serveur_mqtt = "10.200.80.175";
     const char* m_port_mqtt = "1883";
     const char* m_utilisateur = "admin";
     const char* m_motDePasseUtilisateur = "adminadmin";
@@ -43,7 +45,7 @@ private:
     void Publier(Bme280 p_bme);
 public:
     ServeurMQTT();
-    void Configuration();
+    void Configuration(AffichageLCD p_lcd, Bouton p_bouton);
     void Loop(Bme280 p_bme, AffichageLCD p_lcd);
     void LectureCongiguration();
 };

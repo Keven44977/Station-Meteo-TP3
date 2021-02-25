@@ -41,6 +41,13 @@ void AffichageLCD::AfficherMessageMQTT()
     this->m_lcd.print("serveur MQTT...");
 }
 
+void AffichageLCD::AfficherMessageReset(){
+    this->m_lcd.clear();
+    this->m_lcd.print("Parametres Wifi");
+    this->m_lcd.setCursor(0,1);
+    this->m_lcd.print("Reinitialises");
+}
+
 void AffichageLCD::AfficherInfos(float p_temperature, float p_humidite, float p_pression, float p_altitude)
 {
     unsigned long temps = millis();

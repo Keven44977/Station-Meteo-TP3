@@ -34,8 +34,16 @@ void ServeurMQTT::LectureCongiguration()
     }
 }
 
-void ServeurMQTT::Configuration()
+void ServeurMQTT::Configuration(AffichageLCD p_lcd, Bouton p_bouton)
 {
+    if (p_bouton.EstMaintenu())
+    {
+        Serial.println("Paramètres WifiManager réinitialisés");
+        p_lcd.AfficherMessageReset();
+        delay(2500);
+        this->m_wifiManager.resetSettings();
+    }    
+    
     WiFi.mode(WIFI_STA);
     //ajouter la serialization json ici
 
@@ -51,8 +59,9 @@ void ServeurMQTT::Configuration()
     this->m_wifiManager.addParameter(&custom_mqtt_utitilisateur);
     this->m_wifiManager.addParameter(&custom_mqtt_motDePasse);
 
-    //De-commenter la ligne suivante afin de remettre à zéro les paramètres wifi
-    //this->m_wifiManager.resetSettings();
+
+
+    p_lcd.AfficherMessageWifiManager();
 
     if (!this->m_wifiManager.autoConnect())
     {

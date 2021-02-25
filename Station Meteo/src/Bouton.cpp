@@ -3,15 +3,22 @@
 Bouton::Bouton(byte p_pinBouton) : m_pinbouton(p_pinBouton)
 {
     pinMode(this->m_pinbouton, INPUT);
-    this->m_etatPrecedent = !digitalRead(p_pinBouton);
+    this->m_etatPrecedent = digitalRead(p_pinBouton);
     this->m_etatCourant = this->m_etatPrecedent;
+}
+
+byte Bouton::EstMaintenu()
+{
+    Serial.println("Maintenu");
+    Serial.println(digitalRead(m_pinbouton));
+    return digitalRead(this->m_pinbouton);
 }
 
 byte Bouton::EstRelacher()
 {
     byte estRelacher = false;
 
-    this->m_etatCourant = !digitalRead(m_pinbouton);
+    this->m_etatCourant = digitalRead(m_pinbouton);
 
     if (this->m_etatCourant != this->m_etatPrecedent)
     {

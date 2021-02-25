@@ -6,8 +6,7 @@ void StationMeteo::Setup()
 {
     this->m_lcd.Initialiser();
     this->m_bme.EtatInitial();    
-    this->m_lcd.AfficherMessageWifiManager();
-    this->m_serveurMQTT.Configuration();
+    this->m_serveurMQTT.Configuration(this->m_lcd, this->m_bouton);
 }
 
 void StationMeteo::Executer()

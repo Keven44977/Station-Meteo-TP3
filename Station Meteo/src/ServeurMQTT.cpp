@@ -4,10 +4,34 @@ bool shouldSaveConfig = false;
 
 ServeurMQTT::ServeurMQTT() {}
 
-void saveConfigCallback()
+void SauvegardeConfigCallback()
 {
     Serial.println("Devrait sauvegarder la config");
     shouldSaveConfig = true;
+}
+
+void ServeurMQTT::LectureCongiguration()
+{
+    if (shouldSaveConfig)
+    {
+        Serial.println("Lecture de configuration");
+
+        this->m_fichierConfiguration = SPIFFS.open(this->m_fichier, "r");
+        Serial.println("Fichier de configuration ouvert");
+
+        deserializeJson(this->m_doc, this->m_fichierConfiguration);
+
+        this->m_doc["serveurMQTT"] = this->mqtt_serveur;
+        this->m_doc["portMQTT"] = this->mqtt_port;
+        this->m_doc["utilisateur"] = this->mqtt_utilisateur;
+        this->m_doc["MotDePasse"] = this->mqtt_motDePasse;
+
+        serializeJsonPretty(this->m_doc, this->m_fichierConfiguration);
+
+        this->m_fichierConfiguration.close();
+
+        shouldSaveConfig = false;
+    }
 }
 
 void ServeurMQTT::Configuration()
@@ -15,7 +39,7 @@ void ServeurMQTT::Configuration()
     WiFi.mode(WIFI_STA);
     //ajouter la serialization json ici
 
-    this->m_wifiManager.setSaveConfigCallback(saveConfigCallback);
+    this->m_wifiManager.setSaveConfigCallback(SauvegardeConfigCallback);
 
     WiFiManagerParameter custom_mqtt_serveur("serveur", "mqtt serveur", this->m_serveur_mqtt, 40);
     WiFiManagerParameter custom_mqtt_port("port", "mqtt port", this->m_port_mqtt, 5);

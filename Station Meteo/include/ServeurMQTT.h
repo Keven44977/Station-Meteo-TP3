@@ -1,4 +1,5 @@
 #pragma once
+#include <FS.h>
 #include <BME280.h>
 #include <Arduino.h>
 #include <WiFi.h>
@@ -6,8 +7,8 @@
 #include <Wire.h>
 #include <Adafruit_BME280.h>
 #include <WiFiManager.h>
-#include <FS.h>
 #include <ArduinoJson.h>
+#include <SPIFFS.h>
 #include <AffichageLCD.h>
 
 class ServeurMQTT
@@ -18,6 +19,10 @@ private:
     char mqtt_port[5];
     char mqtt_utilisateur[30];
     char mqtt_motDePasse[100];
+    
+    const char* m_fichier = "/configuration.json";
+    File m_fichierConfiguration;
+    DynamicJsonDocument m_doc = DynamicJsonDocument(1024);
 
 	//const char* m_ssid_pointAcces = "StationMeteo1234";
 	//const char* m_motDePasse_pointAcces = "StationMeteo1234";
@@ -40,4 +45,5 @@ public:
     ServeurMQTT();
     void Configuration();
     void Loop(Bme280 p_bme, AffichageLCD p_lcd);
+    void LectureCongiguration();
 };

@@ -31,13 +31,15 @@ class Bme280 {
 class AffichageLCD {
     - LiquidCrystal_I2C m_lcd;
     - byte m_adresseLCD;
-    - long m_tempsPrecedent;
+    - unsigned long m_tempsPrecedent;
     - char m_changerDonnees;
 
     + AffichageLCD(byte p_adresse);
     + void Initialiser();
     + void Allumer();
     + void Eteindre();
+    + void AfficherMessageMQTT();
+    + void AfficherMessageWifiManager();
     + void AfficherInfos(float p_temp, float p_humidite, float p_pression, float p_altitude);
 }
 
@@ -57,6 +59,9 @@ class ServeurMQTT {
     - char mqtt_port[5];
     - char mqtt_utilisateur[30];
     - char mqtt_motDePasse[100];
+    - const char* m_fichier = "/configuration.json";
+    - File m_fichierConfiguration;
+    - DynamicJsonDocument m_doc;;
     - const char* m_serveur_mqtt = "192.168.2.88";
     - const char* m_port_mqtt = "1883";
     - const char* m_utilisateur = "admin";
@@ -65,11 +70,12 @@ class ServeurMQTT {
     - WiFiClient m_espClient;
     - PubSubClient m_client;
 
-    - void Reconnecter();
+    - void Reconnecter(AffichageLCD p_lcd);
     - void Publier(Bme280 p_bme);
     + ServeurMQTT();
     + void Configuration();
-    + void Loop(Bme280 p_bme);
+    + saveConfigCallback();
+    + void Loop(Bme280 p_bme, AffichageLCD p_lcd);
 }
 
 ServeurMQTT --> Bme280

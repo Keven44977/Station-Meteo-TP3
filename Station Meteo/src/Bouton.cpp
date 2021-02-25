@@ -16,7 +16,6 @@ byte Bouton::EstRelacher()
     if (this->m_etatCourant != this->m_etatPrecedent)
     {
         estRelacher = true;
-        Serial.println("relacher");
         this->m_etatPrecedent = this->m_etatCourant;
     }
 
@@ -26,6 +25,5 @@ byte Bouton::EstRelacher()
 byte Bouton::EstAppuyer()
 {
     digitalRead(m_pinbouton) ? this->m_etatPrecedent = false : this->m_etatPrecedent = true;
-    Serial.println("Appuyer");
     return this->m_etatPrecedent;
 }

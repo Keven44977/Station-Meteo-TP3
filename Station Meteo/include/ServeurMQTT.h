@@ -8,6 +8,7 @@
 #include <WiFiManager.h>
 #include <FS.h>
 #include <ArduinoJson.h>
+#include <AffichageLCD.h>
 
 class ServeurMQTT
 {
@@ -33,10 +34,10 @@ private:
     WiFiClient m_espClient;
     PubSubClient m_client = PubSubClient(m_espClient);
 
-    void Reconnecter();
+    void Reconnecter(AffichageLCD p_lcd);
     void Publier(Bme280 p_bme);
 public:
     ServeurMQTT();
     void Configuration();
-    void Loop(Bme280 p_bme);
+    void Loop(Bme280 p_bme, AffichageLCD p_lcd);
 };

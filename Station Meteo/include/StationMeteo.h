@@ -9,16 +9,16 @@
 class StationMeteo 
 {
 private:
-    ServeurMQTT serveurMQTT;
-    byte addrLcd = 0x27;
-    byte addr = 0x76;
-    byte pinBouton = 26;
+    ServeurMQTT m_serveurMQTT;
+    byte m_addrLcd = 0x27;
+    byte m_addr = 0x76;
+    byte m_pinBouton = 26;
 
-    Bme280 bme = Bme280(addr);
-    AffichageLCD lcd = AffichageLCD(addrLcd);
-    Bouton bouton = Bouton(pinBouton);
+    Bme280 m_bme = Bme280(m_addr);
+    AffichageLCD m_lcd = AffichageLCD(m_addrLcd);
+    Bouton m_bouton = Bouton(m_pinBouton);
 
-    byte allumerLCD = 1;
+    byte m_allumerLCD = 1;
 public:
     StationMeteo();
     void Setup();

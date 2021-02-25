@@ -8,7 +8,7 @@ class AffichageLCD
 private:
     LiquidCrystal_I2C m_lcd = LiquidCrystal_I2C(0x00, 0, 0);
     byte m_adresseLCD;
-    long m_tempsPrecedent;
+    unsigned long m_tempsPrecedent;
     char m_changerDonnees;
 
 public:

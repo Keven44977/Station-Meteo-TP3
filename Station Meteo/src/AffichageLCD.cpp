@@ -25,6 +25,15 @@ void AffichageLCD::Eteindre()
     this->m_lcd.noBacklight();
 }
 
+void AffichageLCD:: AfficherMessageVeille(byte p_estEnVeille)
+{
+    this->m_lcd.clear();
+    this->m_lcd.print("Mode veille");
+    this->m_lcd.setCursor(0,1);
+
+    p_estEnVeille?this->m_lcd.print("Actif"):this->m_lcd.println("Inactif");
+}
+
 void AffichageLCD::AfficherMessageWifiManager()
 {
     this->m_lcd.clear();

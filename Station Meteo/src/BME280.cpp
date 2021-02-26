@@ -2,7 +2,7 @@
 
 Bme280::Bme280(byte p_adresse_bme) : m_adresse_bme(p_adresse_bme) {}
 
-void Bme280::EtatInitial() 
+void Bme280::Initialiser() 
 {
     if (!this->m_bme.begin(this->m_adresse_bme))
     {

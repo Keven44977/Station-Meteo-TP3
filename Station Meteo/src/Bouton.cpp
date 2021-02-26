@@ -29,6 +29,7 @@ byte Bouton::EstRelacher()
 
 byte Bouton::EstAppuyer()
 {
+
     digitalRead(m_pinbouton) ? this->m_etatPrecedent = false : this->m_etatPrecedent = true;
 
     return this->m_etatPrecedent;

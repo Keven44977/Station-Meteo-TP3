@@ -1,16 +1,12 @@
 #pragma once
 #include <FS.h>
-#include <BME280.h>
-#include <Arduino.h>
-#include <WiFi.h>
 #include <PubSubClient.h>
 #include <Wire.h>
-#include <Adafruit_BME280.h>
 #include <WiFiManager.h>
 #include <ArduinoJson.h>
 #include <SPIFFS.h>
 #include <AffichageLCD.h>
-#include <Bouton.h>
+#include <BME280.h>
 
 class ServeurMQTT
 {
@@ -28,10 +24,10 @@ private:
 	//const char* m_ssid_pointAcces = "StationMeteo1234";
 	//const char* m_motDePasse_pointAcces = "StationMeteo1234";
 
-    //Kev: .88
+    //Kev: .90
     //Dust: .52
     //Cegep: 10.200.80.175
-	const char* m_serveur_mqtt = "192.168.2.88";
+	const char* m_serveur_mqtt = "192.168.2.90";
     const char* m_port_mqtt = "1883";
     const char* m_utilisateur = "admin";
     const char* m_motDePasseUtilisateur = "adminadmin";
@@ -41,11 +37,12 @@ private:
     WiFiClient m_espClient;
     PubSubClient m_client = PubSubClient(m_espClient);
 
-    void Reconnecter(AffichageLCD p_lcd);
+    void ConnecterMQTT(AffichageLCD p_lcd);
     void Publier(Bme280 p_bme);
 public:
     ServeurMQTT();
-    void Configuration(AffichageLCD p_lcd, Bouton p_bouton);
+    void ReinitialiserWifi();
+    void Initialiser();
     void Loop(Bme280 p_bme, AffichageLCD p_lcd);
     void LectureCongiguration();
 };

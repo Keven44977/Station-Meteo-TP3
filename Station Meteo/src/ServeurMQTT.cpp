@@ -34,16 +34,13 @@ void ServeurMQTT::LectureCongiguration()
     }
 }
 
-void ServeurMQTT::Configuration(AffichageLCD p_lcd, Bouton p_bouton)
+void ServeurMQTT::ReinitialiserWifi()
 {
-    if (p_bouton.EstMaintenu())
-    {
-        Serial.println("Paramètres WifiManager réinitialisés");
-        p_lcd.AfficherMessageReset();
-        delay(2500);
-        this->m_wifiManager.resetSettings();
-    }    
-    
+    this->m_wifiManager.resetSettings();
+}
+
+void ServeurMQTT::Initialiser()
+{
     WiFi.mode(WIFI_STA);
     //ajouter la serialization json ici
 
@@ -58,10 +55,6 @@ void ServeurMQTT::Configuration(AffichageLCD p_lcd, Bouton p_bouton)
     this->m_wifiManager.addParameter(&custom_mqtt_port);
     this->m_wifiManager.addParameter(&custom_mqtt_utitilisateur);
     this->m_wifiManager.addParameter(&custom_mqtt_motDePasse);
-
-
-
-    p_lcd.AfficherMessageWifiManager();
 
     if (!this->m_wifiManager.autoConnect("Super Station Meteo", "12341234"))
     {
@@ -82,7 +75,7 @@ void ServeurMQTT::Configuration(AffichageLCD p_lcd, Bouton p_bouton)
     this->m_client.setServer(this->mqtt_serveur, atoi(this->mqtt_port));
 }
 
-void ServeurMQTT::Reconnecter(AffichageLCD p_lcd)
+void ServeurMQTT::ConnecterMQTT(AffichageLCD p_lcd)
 {
 
     Serial.println("Connexion au serveur Mqtt...");
@@ -96,8 +89,10 @@ void ServeurMQTT::Reconnecter(AffichageLCD p_lcd)
     {
         Serial.print("Echec : ");
         Serial.print(this->m_client.state());
-        Serial.println(" Nouvelle tentative de connection");
+        Serial.println(" Nouvelle tentative de connection dans 5 secondes");
     }
+
+    delay(5000);
 }
 
 void ServeurMQTT::Publier(Bme280 p_bme)
@@ -133,16 +128,17 @@ void ServeurMQTT::Loop(Bme280 p_bme, AffichageLCD p_lcd)
 {
     if (!this->m_client.connected())
     {
-        Reconnecter(p_lcd);
+        ConnecterMQTT(p_lcd);
     }
     else
     {
-        this->m_client.loop();
         long temps = millis();
 
         if (temps - this->m_tempsDernierMessage > 5000)
         {
             this->m_tempsDernierMessage = temps;
+            this->m_client.loop();
+
             Publier(p_bme);
         }
     }

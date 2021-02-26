@@ -21,7 +21,7 @@ void StationMeteo::Executer()
     }
 
     //Allume ou éteint l'écran si le bouton est appuyé
-    if (this->m_bouton.EstRelacher() && this->m_bouton.EstAppuyer())
+    if (this->m_bouton.EstRelacher()&& this->m_bouton.EstAppuyer())
     {
         this->m_allumerLCD = !this->m_allumerLCD;
         this->m_allumerLCD?this->m_lcd.Allumer():this->m_lcd.Eteindre();

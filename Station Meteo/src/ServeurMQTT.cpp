@@ -117,7 +117,7 @@ void ServeurMQTT::Publier(Bme280 p_bme)
     this->m_client.publish("esp32/humidite", humiditeString);
 
     char pressionString[15];
-    dtostrf(p_bme.m_pression / 100.0f, 7, 3, pressionString);
+    dtostrf(p_bme.m_pression / 1000.0f, 7, 3, pressionString);
     Serial.print("Pression: ");
     Serial.println(pressionString);
     this->m_client.publish("esp32/pression", pressionString);

@@ -31,7 +31,7 @@ private:
     //Kev: .88
     //Dust: .52
     //Cegep: 10.200.80.175
-	const char* m_serveur_mqtt = "10.200.80.175";
+	const char* m_serveur_mqtt = "192.168.2.88";
     const char* m_port_mqtt = "1883";
     const char* m_utilisateur = "admin";
     const char* m_motDePasseUtilisateur = "adminadmin";

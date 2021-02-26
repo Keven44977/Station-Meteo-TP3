@@ -18,7 +18,7 @@ private:
     AffichageLCD m_lcd = AffichageLCD(m_addrLcd);
     Bouton m_bouton = Bouton(m_pinBouton);
 
-    byte m_allumerLCD = 1;
+    byte m_allumerLCD;
 public:
     StationMeteo();
     void Setup();

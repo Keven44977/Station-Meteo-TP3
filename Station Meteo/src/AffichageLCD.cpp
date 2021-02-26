@@ -60,24 +60,16 @@ void AffichageLCD::AfficherInfos(float p_temperature, float p_humidite, float p_
         if (this->m_changerDonnees)
         {
             this->m_lcd.setCursor(0, 0);
-            this->m_lcd.print("Temp: ");
-            this->m_lcd.print(p_temperature);
-            this->m_lcd.print("C");
+            this->m_lcd.print(String("Temp: ") + String(p_temperature) + String(char(223)) + String("C"));
             this->m_lcd.setCursor(0, 1);
-            this->m_lcd.print("Hum: ");
-            this->m_lcd.print(p_humidite);
-            this->m_lcd.print("%");
+            this->m_lcd.print(String("Hum: ")+ String(p_humidite) + String("%"));
         }
         else
         {
             this->m_lcd.setCursor(0, 0);
-            this->m_lcd.print("Pres: ");
-            this->m_lcd.print(p_pression / 100.0f);
-            this->m_lcd.print("hPa");
+            this->m_lcd.print(String("Pres: ")+ String(p_pression/1000.0f)+ String("kPa"));
             this->m_lcd.setCursor(0, 1);
-            this->m_lcd.print("Alt: ");
-            this->m_lcd.print(p_altitude);
-            this->m_lcd.print("m");
+            this->m_lcd.print(String("Alt: ")+String(p_altitude)+String("m"));
         }
 
         this->m_changerDonnees = !this->m_changerDonnees;

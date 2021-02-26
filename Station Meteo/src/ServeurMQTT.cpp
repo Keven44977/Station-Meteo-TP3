@@ -63,7 +63,7 @@ void ServeurMQTT::Configuration(AffichageLCD p_lcd, Bouton p_bouton)
 
     p_lcd.AfficherMessageWifiManager();
 
-    if (!this->m_wifiManager.autoConnect())
+    if (!this->m_wifiManager.autoConnect("Super Station Meteo", "12341234"))
     {
         Serial.println("Erreur de connexion");
         delay(2000);

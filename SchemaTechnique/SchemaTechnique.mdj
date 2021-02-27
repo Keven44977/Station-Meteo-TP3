@@ -2072,6 +2072,105 @@
 							"propertyLabel": {
 								"$ref": "AAAAAAF3ywIM/GEfiI8="
 							}
+						},
+						{
+							"_type": "UMLActionView",
+							"_id": "AAAAAAF34ZfxfVJ8+9A=",
+							"_parent": {
+								"$ref": "AAAAAAF3yvKnF15KB2U="
+							},
+							"model": {
+								"$ref": "AAAAAAF34ZfxfFJ6fA8="
+							},
+							"subViews": [
+								{
+									"_type": "UMLNameCompartmentView",
+									"_id": "AAAAAAF34ZfxfVJ95vU=",
+									"_parent": {
+										"$ref": "AAAAAAF34ZfxfVJ8+9A="
+									},
+									"model": {
+										"$ref": "AAAAAAF34ZfxfFJ6fA8="
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF34ZfxfVJ+mv4=",
+											"_parent": {
+												"$ref": "AAAAAAF34ZfxfVJ95vU="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"top": -16,
+											"height": 13
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF34ZfxfVJ/BQE=",
+											"_parent": {
+												"$ref": "AAAAAAF34ZfxfVJ95vU="
+											},
+											"font": "Arial;13;1",
+											"left": 173,
+											"top": 343,
+											"width": 174,
+											"height": 13,
+											"text": "Access point"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF34ZfxfVKA+XY=",
+											"_parent": {
+												"$ref": "AAAAAAF34ZfxfVJ95vU="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"top": -16,
+											"width": 86.6708984375,
+											"height": 13,
+											"text": "(from Activity1)"
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAF34ZfxfVKB/aI=",
+											"_parent": {
+												"$ref": "AAAAAAF34ZfxfVJ95vU="
+											},
+											"visible": false,
+											"font": "Arial;13;0",
+											"top": -16,
+											"height": 13,
+											"horizontalAlignment": 1
+										}
+									],
+									"font": "Arial;13;0",
+									"left": 168,
+									"top": 336,
+									"width": 184,
+									"height": 25,
+									"stereotypeLabel": {
+										"$ref": "AAAAAAF34ZfxfVJ+mv4="
+									},
+									"nameLabel": {
+										"$ref": "AAAAAAF34ZfxfVJ/BQE="
+									},
+									"namespaceLabel": {
+										"$ref": "AAAAAAF34ZfxfVKA+XY="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAF34ZfxfVKB/aI="
+									}
+								}
+							],
+							"font": "Arial;13;0",
+							"containerChangeable": true,
+							"left": 168,
+							"top": 336,
+							"width": 184,
+							"height": 41,
+							"nameCompartment": {
+								"$ref": "AAAAAAF34ZfxfVJ95vU="
+							}
 						}
 					]
 				}
@@ -2173,6 +2272,14 @@
 						"$ref": "AAAAAAF3yvKnF15J6TY="
 					},
 					"name": "Action2"
+				},
+				{
+					"_type": "UMLAction",
+					"_id": "AAAAAAF34ZfxfFJ6fA8=",
+					"_parent": {
+						"$ref": "AAAAAAF3yvKnF15J6TY="
+					},
+					"name": "Access point"
 				}
 			],
 			"edges": [

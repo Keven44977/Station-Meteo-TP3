@@ -9,7 +9,8 @@ class StationMeteo {
     - AffichageLCD lcd;
     - Bouton bouton;
     - byte allumerLCD = 1;
-
+    - byte m_modeHorsLigne;
+    
     + StationMeteo();
     + void Setup();
     + void Executer();
@@ -21,7 +22,6 @@ class Bme280 {
     + float m_temperature;
     + float m_humidite;
     + float m_pression;
-    + float m_altitude;
 
     + Bme280(byte p_adresse_bme);
     + void EtatInitial();
@@ -38,8 +38,10 @@ class AffichageLCD {
     + void Initialiser();
     + void Allumer();
     + void Eteindre();
+    + void AfficherMessageVeille(byte p_estEnVeille);
     + void AfficherMessageMQTT();
     + void AfficherMessageWifiManager();
+    + void AfficherMessageReset();
     + void AfficherInfos(float p_temp, float p_humidite, float p_pression, float p_altitude);
 }
 

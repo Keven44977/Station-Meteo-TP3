@@ -17,17 +17,14 @@ private:
     char mqtt_utilisateur[30];
     char mqtt_motDePasse[100];
     
-    const char* m_fichier = "/configuration.json";
+    const char* m_fichier = "/config.json";
     File m_fichierConfiguration;
     DynamicJsonDocument m_doc = DynamicJsonDocument(1024);
-
-	//const char* m_ssid_pointAcces = "StationMeteo1234";
-	//const char* m_motDePasse_pointAcces = "StationMeteo1234";
 
     //Kev: .90
     //Dust: .52
     //Cegep: 10.200.80.175
-	const char* m_serveur_mqtt = "192.168.2.90";
+	const char* m_serveur_mqtt = "192.168.2.52";
     const char* m_port_mqtt = "1883";
     const char* m_utilisateur = "admin";
     const char* m_motDePasseUtilisateur = "adminadmin";
@@ -43,6 +40,8 @@ public:
     ServeurMQTT();
     void ReinitialiserWifi();
     void Initialiser();
+    void ConnectionAuAccessPoint();
     void Loop(Bme280 p_bme, AffichageLCD p_lcd);
-    void LectureCongiguration();
+    void EnregistrerParametresWifiManager();
+    void LectureParametreWifiManager();
 };

@@ -31,7 +31,7 @@ void AffichageLCD:: AfficherMessageVeille(byte p_estEnVeille)
     this->m_lcd.print("Mode veille");
     this->m_lcd.setCursor(0,1);
 
-    p_estEnVeille?this->m_lcd.print("Actif"):this->m_lcd.println("Inactif");
+    p_estEnVeille?this->m_lcd.print("Actif"):this->m_lcd.print("Inactif");
 }
 
 void AffichageLCD::AfficherMessageWifiManager()
@@ -57,7 +57,7 @@ void AffichageLCD::AfficherMessageReset(){
     this->m_lcd.print("Reinitialises");
 }
 
-void AffichageLCD::AfficherInfos(float p_temperature, float p_humidite, float p_pression, float p_altitude)
+void AffichageLCD::AfficherInfos(float p_temperature, float p_humidite, float p_pression)
 {
     unsigned long temps = millis();
 
@@ -71,14 +71,14 @@ void AffichageLCD::AfficherInfos(float p_temperature, float p_humidite, float p_
             this->m_lcd.setCursor(0, 0);
             this->m_lcd.print(String("Temp: ") + String(p_temperature) + String(char(223)) + String("C"));
             this->m_lcd.setCursor(0, 1);
-            this->m_lcd.print(String("Hum: ")+ String(p_humidite) + String("%"));
+            this->m_lcd.print(String("Humidite: ")+ String(p_humidite) + String("%"));
         }
         else
         {
             this->m_lcd.setCursor(0, 0);
-            this->m_lcd.print(String("Pres: ")+ String(p_pression/1000.0f)+ String("kPa"));
+            this->m_lcd.print(String("Pression: "));
             this->m_lcd.setCursor(0, 1);
-            this->m_lcd.print(String("Alt: ")+String(p_altitude)+String("m"));
+            this->m_lcd.print(String(p_pression/1000.0f)+ String("kPa"));
         }
 
         this->m_changerDonnees = !this->m_changerDonnees;

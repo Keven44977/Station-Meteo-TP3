@@ -116,12 +116,6 @@ void ServeurMQTT::Publier(Bme280 p_bme)
     Serial.print("Pression: ");
     Serial.println(pressionString);
     this->m_client.publish("esp32/pression", pressionString);
-
-    char altitudeString[15];
-    dtostrf(p_bme.m_altitude, 7, 3, altitudeString);
-    Serial.print("Altitude: ");
-    Serial.println(altitudeString);
-    this->m_client.publish("esp32/altitude", altitudeString);
 }
 
 void ServeurMQTT::Loop(Bme280 p_bme, AffichageLCD p_lcd)

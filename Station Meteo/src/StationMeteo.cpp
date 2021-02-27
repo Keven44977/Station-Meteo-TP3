@@ -73,7 +73,7 @@ void StationMeteo::Executer()
     //Affiche les infos si le lcd est allumé
     if (this->m_allumerLCD)
     {
-        this->m_lcd.AfficherInfos(this->m_bme.m_temperature, this->m_bme.m_humidite, this->m_bme.m_pression, this->m_bme.m_altitude);
+        this->m_lcd.AfficherInfos(this->m_bme.m_temperature, this->m_bme.m_humidite, this->m_bme.m_pression);
     }
 
     //Allume ou éteint l'écran si le bouton est appuyé

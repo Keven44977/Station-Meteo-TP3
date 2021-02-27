@@ -17,5 +17,4 @@ void Bme280::LireInformationBme280()
     this->m_temperature = this->m_bme.readTemperature();
     this->m_humidite = this->m_bme.readHumidity();
     this->m_pression = this->m_bme.readPressure();
-    this->m_altitude = this->m_bme.readAltitude(1013.25);
 }

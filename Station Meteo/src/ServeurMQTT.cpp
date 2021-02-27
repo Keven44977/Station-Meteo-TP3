@@ -1,13 +1,13 @@
 #include <ServeurMQTT.h>
 
-bool shouldSaveConfig = false;
+bool devraitSauvegarderConfiguration = false;
 
 ServeurMQTT::ServeurMQTT() {}
 
 void SauvegardeConfigCallback()
 {
     Serial.println("Devrait sauvegarder la config");
-    shouldSaveConfig = true;
+    devraitSauvegarderConfiguration = true;
 }
 
 void ServeurMQTT::LectureParametreWifiManager()
@@ -55,7 +55,7 @@ void ServeurMQTT::LectureParametreWifiManager()
 
 void ServeurMQTT::EnregistrerParametresWifiManager()
 {
-    if (shouldSaveConfig)
+    if (devraitSauvegarderConfiguration)
     {
         Serial.println("Sauvegarde de configuration");
 
@@ -81,7 +81,7 @@ void ServeurMQTT::EnregistrerParametresWifiManager()
 
         this->m_fichierConfiguration.close();
 
-        shouldSaveConfig = false;
+        devraitSauvegarderConfiguration = false;
     }
 }
 

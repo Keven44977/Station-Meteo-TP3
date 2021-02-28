@@ -31,6 +31,7 @@ void AffichageLCD:: AfficherMessageVeille(byte p_estEnVeille)
     this->m_lcd.print("Mode veille");
     this->m_lcd.setCursor(0,1);
 
+    //Si la station est en mode veille, affiche Actif sinon affiche Inactif
     p_estEnVeille?this->m_lcd.print("Actif"):this->m_lcd.print("Inactif");
 }
 
@@ -61,6 +62,7 @@ void AffichageLCD::AfficherInfos(float p_temperature, float p_humidite, float p_
 {
     unsigned long temps = millis();
 
+    // Change l'affichage entre température/humidité et pression à tous les 2.5 secondes.
     if (temps - this->m_tempsPrecedent > 2500)
     {
         this->m_tempsPrecedent = temps;

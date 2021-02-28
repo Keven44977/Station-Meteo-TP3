@@ -185,12 +185,15 @@ void ServeurMQTT::Publier(Bme280 p_bme)
 
 void ServeurMQTT::Loop(Bme280 p_bme, AffichageLCD p_lcd)
 {
+    //Si le client n'est pas connecté au MQTT
     if (!this->m_client.connected())
     {
+        //Il se connecte au serveur
         ConnecterMQTT(p_lcd);
     }
     else
     {
+        //Sinon il publie les données à chaque 5 secondes
         long temps = millis();
 
         if (temps - this->m_tempsDernierMessage > 5000)

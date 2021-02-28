@@ -8,9 +8,10 @@ class StationMeteo {
     - Bme280 bme;
     - AffichageLCD lcd;
     - Bouton bouton;
-    - byte allumerLCD = 1;
+    - byte allumerLCD;
     - byte m_modeHorsLigne;
     
+    - void GestionMenuDemarrage();
     + StationMeteo();
     + void Setup();
     + void Executer();
@@ -42,7 +43,7 @@ class AffichageLCD {
     + void AfficherMessageMQTT();
     + void AfficherMessageWifiManager();
     + void AfficherMessageReset();
-    + void AfficherInfos(float p_temp, float p_humidite, float p_pression, float p_altitude);
+    + void AfficherInfos(float p_temp, float p_humidite, float p_pression);
 }
 
 class Bouton {
@@ -76,8 +77,10 @@ class ServeurMQTT {
     - void Publier(Bme280 p_bme);
     + ServeurMQTT();
     + void Configuration();
-    + saveConfigCallback();
+    + void ConnectionAuAccessPoint();
     + void Loop(Bme280 p_bme, AffichageLCD p_lcd);
+    + void EnregistrerParametresWifiManager();
+    + void LectureParametreWifiManager();
 }
 
 ServeurMQTT --> Bme280
